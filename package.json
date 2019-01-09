@@ -1,0 +1,38 @@
+{
+  "name": "atomic-autofileindex",
+  "version": "0.1.0",
+  "description": "Generate root index.js file for your set of components from terget directories",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "",
+    "eslint": "eslint src/ --cache --fix"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js)": [
+      "yarn eslint",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "js",
+    "atomic-design",
+    "react",
+    "components"
+  ],
+  "author": "mbalabash",
+  "license": "MIT"
+}
