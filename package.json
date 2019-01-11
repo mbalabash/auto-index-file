@@ -1,12 +1,15 @@
 {
-  "name": "atomic-autofileindex",
+  "name": "auto-index-file",
   "version": "0.1.0",
-  "description": "Generate root index.js file for your set of components from terget directories",
-  "main": "./src/index.js",
+  "description": "Generate root index.js file from target directories",
   "scripts": {
-    "start": "node ./src/index.js",
-    "test": "",
-    "eslint": "eslint src/ --cache --fix"
+    "start": "node -r esm ./autoindexfile.js",
+    "eslint": "eslint ./src --cache --fix",
+    "test": ""
+  },
+  "dependencies": {
+    "acorn-loose": "^6.0.0",
+    "esm": "^3.0.84"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
@@ -29,8 +32,8 @@
   },
   "keywords": [
     "js",
-    "atomic-design",
-    "react",
+    "index file",
+    "atomic design",
     "components"
   ],
   "author": "mbalabash",
