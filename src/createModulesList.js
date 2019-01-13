@@ -13,7 +13,7 @@ const createModulesList = async (files) => {
     console.log(`Processed: ${file}`)
     const filePath = `${cwd}/${file}`
 
-    const content = await readFile(filePath, 'utf8')
+    const content = await readFile(filePath)
     const ast = acorn.parse(content, { sourceType: 'module' })
 
     const { body: nodes } = ast
