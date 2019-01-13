@@ -17,7 +17,12 @@ const createModulesList = async (files) => {
     const ast = acorn.parse(content, { sourceType: 'module' })
 
     const { body: nodes } = ast
-    const moduleObj = { file: '', name: '', exports: [] }
+    const moduleObj = {
+      file: '',
+      name: '',
+      namedExports: [],
+      defaultExport: '',
+    }
 
     nodes.forEach((node) => {
       const { type } = node
@@ -25,15 +30,15 @@ const createModulesList = async (files) => {
         const {
           declaration: { name },
         } = node
-        moduleObj.exports.push({ type, name })
+        moduleObj.defaultExport = name
       }
-      if (type === 'ExportNamedDeclaration') {
+      if (type === 'ExportNamedDeclaration' && node.declaration) {
         const { name } = node.declaration.declarations[0].id
-        moduleObj.exports.push({ type, name })
+        moduleObj.namedExports.push(name)
       }
     })
 
-    if (moduleObj.exports.length > 0) {
+    if (moduleObj.namedExports.length > 0 || moduleObj.defaultExport.length > 0) {
       moduleObj.file = `./${file}`
       moduleObj.name = getParentDirectoryName(file)
       modules.push(moduleObj)

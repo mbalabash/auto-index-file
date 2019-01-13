@@ -2,19 +2,16 @@ const path = require('path')
 const scanFiles = require('./scanFiles')
 const { isCorrectFileName } = require('./utils')
 const createModulesList = require('./createModulesList')
+const generateExportString = require('./generateExportString')
 
 const generateIndexFile = async (config) => {
   const { rootDir } = config
-  const fileContent = null
+  let fileContent = null
 
   try {
-    let files = scanFiles(path.normalize(rootDir), config)
-    files = files.filter(isCorrectFileName)
-
+    const files = scanFiles(path.normalize(rootDir), config).filter(isCorrectFileName)
     const modulesList = await createModulesList(files)
-    console.log(modulesList)
-
-    // generate file content
+    fileContent = modulesList.map(generateExportString).join('\n')
   } catch (error) {
     console.error(error)
   }
