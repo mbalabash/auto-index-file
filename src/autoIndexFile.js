@@ -1,22 +1,14 @@
 // const chokidar = require('chokidar')
-const generateFileContent = require('./generateFileContent')
+const initArgParser = require('./argParser')
 const { writeIndexFile } = require('./utils')
-
-const defaultConfiguration = {
-  rootDir: 'src/components',
-  fileFormats: ['.js', '.jsx', '.ts'],
-  ignoreDirectories: [],
-  ignoreFiles: [],
-  recursive: true,
-  watch: true,
-}
+const generateFileContent = require('./generateFileContent')
 
 const autoIndexFile = async (options) => {
   try {
-    const { rootDir } = options
+    const { targetDir } = options
     const fileContent = await generateFileContent(options)
     if (fileContent) {
-      await writeIndexFile(rootDir, fileContent)
+      await writeIndexFile(targetDir, fileContent)
     }
   } catch (error) {
     console.error(error)
@@ -24,9 +16,10 @@ const autoIndexFile = async (options) => {
 }
 
 ;(async () => {
-  // parse cli arguments
-  const cliOptions = { rootDir: 'debugDir' }
-  const options = { ...defaultConfiguration, ...cliOptions }
+  const argParser = initArgParser()
+  const options = argParser.parseArgs()
+
+  console.log(options)
 
   autoIndexFile(options)
 })()

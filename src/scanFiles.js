@@ -9,7 +9,7 @@ const scanFiles = (directory, options) => {
     if (!fs.existsSync(directory)) throw new Error(`${directory} - directory not exist!`)
 
     const {
-      fileFormats, ignoreFiles, ignoreDirectories, recursive,
+      fileFormats, excludedFiles, excludedDirectories, recursive,
     } = options
 
     const fileNames = fs.readdirSync(directory)
@@ -19,13 +19,13 @@ const scanFiles = (directory, options) => {
 
       if (
         stats.isFile()
-        && !ignoreFiles.includes(name)
+        && !excludedFiles.includes(name)
         && fileFormats.includes(path.extname(name))
       ) {
         files.push(targetPath)
       }
 
-      if (stats.isDirectory() && !ignoreDirectories.includes(name)) {
+      if (stats.isDirectory() && !excludedDirectories.includes(name)) {
         directories.push(targetPath)
       }
     })
