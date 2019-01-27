@@ -1,5 +1,5 @@
-// const chokidar = require('chokidar')
-const initArgParser = require('./argParser')
+const chokidar = require('chokidar')
+const initArgParser = require('./cliArgsParser')
 const { writeIndexFile } = require('./utils')
 const generateFileContent = require('./generateFileContent')
 
@@ -19,7 +19,21 @@ const autoIndexFile = async (options) => {
   const argParser = initArgParser()
   const options = argParser.parseArgs()
 
-  console.log(options)
+  const { watch, targetDir } = options
+  if (watch) {
+    const watcher = chokidar.watch(targetDir, {
+      ignored: `${targetDir}/index.js`,
+      persistent: true,
+    })
+    const worker = async (path) => {
+      console.log(`Changed: ${path}\n`)
+      await autoIndexFile(options)
+    }
+    watcher.on('change', worker)
+    watcher.on('unlink', worker)
+  } else {
+    await autoIndexFile(options)
+  }
 
-  autoIndexFile(options)
+  console.log('AutoIndexFile started!')
 })()

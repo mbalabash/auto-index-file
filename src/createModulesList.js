@@ -10,7 +10,6 @@ const createModulesList = async (files) => {
 
   try {
     const promises = files.map(async (file) => {
-      console.log(`Processing: ${file}`)
       const content = await readFile(file)
       const ast = acorn.parse(content, { sourceType: 'module' })
       const moduleObj = parseModuleFromAst(file, ast)

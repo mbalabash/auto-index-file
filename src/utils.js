@@ -14,8 +14,9 @@ const isCorrectFileName = fileName => path.basename(fileName).toLowerCase() === 
 const writeIndexFile = async (directory, content) => {
   const targetPath = path.join(directory, 'index.js')
   try {
+    const isFileExist = fs.existsSync(targetPath)
     writeFile(targetPath, content)
-    console.log(`Index file was successfully saved: ${targetPath}`)
+    console.log(`Index.js was ${isFileExist ? 'updated' : 'created'}!\n`)
   } catch (error) {
     console.error(error)
   }

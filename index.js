@@ -1,6 +1,6 @@
 require('./src/autoIndexFile.js')
 
 // Main features:
-// 4) Watch file changes
-// 5) Add result index file to ignored files
-// 6) Check ['.js', '.jsx', '.ts']
+// 1) Tests
+// 2) Docs
+// 3) Good testing in the wild
