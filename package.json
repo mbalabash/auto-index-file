@@ -1,17 +1,18 @@
 {
   "name": "auto-index-file",
   "version": "0.1.0",
-  "description": "Generate root index.js file from target directories",
+  "description": "Generate index.js file from target directories.",
   "scripts": {
-    "start": "node -r esm ./autoindexfile.js",
+    "start": "node -r esm ./index.js",
     "eslint": "eslint ./src --cache --fix",
-    "test": ""
+    "test": "ava"
   },
   "dependencies": {
     "acorn-loose": "^6.0.0",
     "esm": "^3.0.84"
   },
   "devDependencies": {
+    "ava": "^1.1.0",
     "eslint": "^5.12.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -31,10 +32,11 @@
     ]
   },
   "keywords": [
-    "js",
     "index file",
-    "atomic design",
-    "components"
+    "index.js",
+    "js",
+    "components",
+    "atomic design"
   ],
   "author": "mbalabash",
   "license": "MIT"

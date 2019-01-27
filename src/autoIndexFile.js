@@ -1,12 +1,13 @@
-const generateIndexFile = require('./generateIndexFile')
-const writeIndexFile = require('./writeIndexFile')
+const createFileContent = require('./createFileContent')
+const { writeIndexFile } = require('./utils')
 
 const defaultConfiguration = {
   rootDir: 'src/components',
   processingFileFormats: ['.js', '.jsx', '.ts'],
-  ignoreFiles: [],
   ignoreDirectories: [],
+  ignoreFiles: [],
   recursive: true,
+  watch: true,
 }
 
 ;(async () => {
@@ -14,7 +15,7 @@ const defaultConfiguration = {
   const cliOptions = { rootDir: 'debugDir' }
   const config = { ...defaultConfiguration, ...cliOptions }
 
-  const fileContent = await generateIndexFile(config)
+  const fileContent = await createFileContent(config)
   if (typeof fileContent !== 'string') return
 
   const { rootDir } = config

@@ -1,4 +1,4 @@
-require('./src/index.js')
+require('./src/autoIndexFile.js')
 
 // Main features:
 // 4) Watch file changes

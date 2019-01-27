@@ -10,7 +10,7 @@ const createModulesList = async (files) => {
   const cwd = process.cwd()
 
   const promises = files.map(async (file) => {
-    console.log(`Processed: ${file}`)
+    console.log(`Processing: ${file}`)
     const filePath = `${cwd}/${file}`
 
     const content = await readFile(filePath)
