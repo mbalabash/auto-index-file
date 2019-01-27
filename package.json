@@ -1,15 +1,15 @@
 {
   "name": "auto-index-file",
   "version": "0.1.0",
-  "description": "Generate index.js file from target directories.",
+  "description": "Index.js file without tears",
   "scripts": {
-    "start": "node -r esm ./index.js",
+    "start": "node index.js",
     "eslint": "eslint ./src --cache --fix",
     "test": "ava"
   },
   "dependencies": {
     "acorn-loose": "^6.0.0",
-    "esm": "^3.0.84"
+    "chokidar": "^2.0.4"
   },
   "devDependencies": {
     "ava": "^1.1.0",
@@ -32,7 +32,6 @@
     ]
   },
   "keywords": [
-    "index file",
     "index.js",
     "js",
     "components",

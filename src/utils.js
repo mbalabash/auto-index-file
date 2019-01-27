@@ -1,5 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+const { promisify } = require('util')
+
+const writeFile = promisify(fs.writeFile)
 
 const getParentDirectoryName = fileName => path
   .dirname(fileName)
@@ -8,19 +11,20 @@ const getParentDirectoryName = fileName => path
 
 const isCorrectFileName = fileName => path.basename(fileName).toLowerCase() === 'index.js'
 
-const writeIndexFile = (directory, content) => {
+const writeIndexFile = async (directory, content) => {
   const targetPath = path.join(directory, 'index.js')
-
-  fs.writeFile(targetPath, content, (err) => {
-    if (err) console.error(err)
+  try {
+    writeFile(targetPath, content)
     console.log(`Index file was successfully saved: ${targetPath}`)
-  })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-const createExportString = (moduleItem) => {
+const createExportString = (moduleObj) => {
   const {
     file, name, defaultExport, namedExports,
-  } = moduleItem
+  } = moduleObj
   let exportString = ''
 
   if (defaultExport.length > 0) {
@@ -35,5 +39,8 @@ const createExportString = (moduleItem) => {
 }
 
 module.exports = {
-  isCorrectFileName, getParentDirectoryName, writeIndexFile, createExportString,
+  isCorrectFileName,
+  getParentDirectoryName,
+  writeIndexFile,
+  createExportString,
 }
