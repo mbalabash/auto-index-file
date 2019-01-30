@@ -36,12 +36,6 @@ const initArgParser = () => {
     nargs: '+',
     help: 'Excluded directories (default: [])',
   })
-  argParser.addArgument(['-ef', '--excludedFiles'], {
-    metavar: '',
-    defaultValue: [],
-    nargs: '+',
-    help: 'Excluded files (default: [])',
-  })
 
   return argParser
 }

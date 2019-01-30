@@ -21,6 +21,12 @@
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3"
   },
+  "ava": {
+    "files": [
+      "test/**/*.js",
+      "!test/__mock__/**"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

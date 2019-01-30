@@ -4,10 +4,16 @@ const { promisify } = require('util')
 
 const writeFile = promisify(fs.writeFile)
 
-const getParentDirectoryName = fileName => path
-  .dirname(fileName)
-  .split(path.sep)
-  .pop()
+const getParentDirectoryName = (filePath) => {
+  const isNotString = typeof filePath !== 'string'
+  if (isNotString || (!isNotString && filePath.length === 0)) {
+    throw new Error('filePath should have type string and contain a path to file!')
+  }
+  return path
+    .dirname(filePath)
+    .split(path.sep)
+    .pop()
+}
 
 const isCorrectFileName = fileName => path.basename(fileName).toLowerCase() === 'index.js'
 

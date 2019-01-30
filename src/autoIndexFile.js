@@ -31,9 +31,8 @@ const autoIndexFile = async (options) => {
     }
     watcher.on('change', worker)
     watcher.on('unlink', worker)
+    console.log('AutoIndexFile: started!')
   } else {
     await autoIndexFile(options)
   }
-
-  console.log('AutoIndexFile started!')
 })()
