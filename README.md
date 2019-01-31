@@ -60,7 +60,33 @@ Mmm, no thanks! It more badly than the first approach.
 
 Fortunately, this work very easy to **automate**!
 
-## Idea and Features
+## Features
+
+**File formats**: you may pass for example .jsx or .ts.
+
+**Ignore directories**: you can exclude directories from processing.
+
+**Named exports**: this tool can handle named exports from your components.
+
+**Recursive**: this tool can handle subdirectories or only one layer.
+
+**Watch**: this tool can observe file changes and run automatically or just once.
+
+## Assumptions
+
+**_Js modules version_**
+**_File name calculation for default export_**
+**_File name calculation for named export_**
+
+This tool expects and works only with components structured by the following scheme:
+
+```
+
+Button - directory
+index.js - component implementation (сase insensitive)
+...
+
+```
 
 ## Install
 
