@@ -79,10 +79,12 @@ Fortunately, this work very easy to **automate**!
 This tool **expects and works only** with components structured by the following scheme:
 
 ```
-Link - directory
+Link - component directory
   index.js - component implementation (сase insensitive)
   ...
 ```
+
+See example: [here](example/components/atoms/Text/index.js) or [here](example/components/Link/index.js)
 
 ## Name resolving
 
