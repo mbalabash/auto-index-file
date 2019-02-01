@@ -62,31 +62,39 @@ Fortunately, this work very easy to **automate**!
 
 ## Features
 
-**File formats**: you may pass for example .jsx or .ts.
+**File formats**: you may pass what you want. For example .jsx or .ts.
 
 **Ignore directories**: you can exclude directories from processing.
 
 **Named exports**: this tool can handle named exports from your components.
 
-**Recursive**: this tool can handle subdirectories or only one layer.
+**Recursive**: handle subdirectories or only one layer.
 
-**Watch**: this tool can observe file changes and run automatically or just once.
+**Watch**: observe file changes and run automatically or just once.
 
-## Assumptions
+## Restrictions
 
-**_Js modules version_**
-**_File name calculation for default export_**
-**_File name calculation for named export_**
+**It works only with es6 modules syntax**.
 
-This tool expects and works only with components structured by the following scheme:
+This tool **expects and works only** with components structured by the following scheme:
 
 ```
-
-Button - directory
-index.js - component implementation (сase insensitive)
-...
-
+Link - directory
+  index.js - component implementation (сase insensitive)
+  ...
 ```
+
+## Name resolving
+
+**Name calculation for default export**: module name will be a directory name.
+
+For above example module name will be - **Link**.
+
+**Name calculation for named export**: module name will be a combination of directory name and export name.
+
+For above example module name will be - **LinkAnchor**.
+
+See example: [here](example/components/index.js)
 
 ## Install
 
