@@ -1,1 +1,1 @@
-import { LinkAnchor, Link } from './components' // eslint-disable-line no-unused-vars
+import { Link_Anchor as Anchor, Link } from './components'

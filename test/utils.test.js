@@ -1,5 +1,5 @@
 const test = require('ava')
-const { isCorrectFileName, createExportString, getParentDirectoryName } = require('../src/utils')
+const { isCorrectFileName, getParentDirectoryName, normalizeFilesPath } = require('../src/utils')
 
 test('should be a correct file name', (t) => {
   const correctFileName1 = 'Index.js'
@@ -19,39 +19,6 @@ test('should be an incorrect file name', (t) => {
   t.is(isCorrectFileName(incorrectFileName3), false)
 })
 
-test('should create correct export string from moduleObject', (t) => {
-  const module1 = {
-    file: './debugDir/molecules/AppLogo/index.js',
-    name: 'AppLogo',
-    namedExports: ['Component1', 'Component2', 'Component3'],
-    defaultExport: '',
-  }
-  const module2 = {
-    file: './debugDir/atoms/PageLayout/index.js',
-    name: 'PageLayout',
-    namedExports: [],
-    defaultExport: 'Layout',
-  }
-  const module3 = {
-    file: './debugDir/atoms/PageContent/index.js',
-    name: 'PageContent',
-    namedExports: ['Component1'],
-    defaultExport: 'Content',
-  }
-  t.is(
-    createExportString(module1),
-    "export { Component1, Component2, Component3 } from './debugDir/molecules/AppLogo/index.js'",
-  )
-  t.is(
-    createExportString(module2),
-    "export { default as PageLayout } from './debugDir/atoms/PageLayout/index.js'",
-  )
-  t.is(
-    createExportString(module3),
-    "export { default as PageContent } from './debugDir/atoms/PageContent/index.js'\nexport { Component1 } from './debugDir/atoms/PageContent/index.js'",
-  )
-})
-
 test('should extract parent directory name correctly', async (t) => {
   const parentDir1 = 'Debug/index.js'
   const parentDir2 = 'Debug/atoms/Text/index.js'
@@ -65,16 +32,16 @@ test('should extract parent directory name correctly', async (t) => {
   t.is(getParentDirectoryName(parentDir5), 'List')
 })
 
-test('getParentDirectoryName should throw an error when called with the wrong argument', async (t) => {
-  const parentDir1 = 123
-  const parentDir2 = {}
-  const parentDir3 = []
-  const parentDir4 = undefined
-  const parentDir5 = ''
+test('should correctly normalize file path', async (t) => {
+  const moduleObj1 = { file: './data/components/test/index.js' }
+  const moduleObj2 = { file: './components/Button/index.js' }
+  const moduleObj3 = { file: './components/test/data/atoms/Text/index.js' }
+  const moduleObj4 = { file: './modules/ui/data/test/components/kit/qwe/Text/index.js' }
 
-  t.throws(() => getParentDirectoryName(parentDir1))
-  t.throws(() => getParentDirectoryName(parentDir2))
-  t.throws(() => getParentDirectoryName(parentDir3))
-  t.throws(() => getParentDirectoryName(parentDir4))
-  t.throws(() => getParentDirectoryName(parentDir5))
+  t.deepEqual(normalizeFilesPath('data/components', [moduleObj1]), [{ file: './test' }])
+  t.deepEqual(normalizeFilesPath('components', [moduleObj2]), [{ file: './Button' }])
+  t.deepEqual(normalizeFilesPath('components', [moduleObj3]), [{ file: './test/data/atoms/Text' }])
+  t.deepEqual(normalizeFilesPath('modules/ui/data/test/components', [moduleObj4]), [
+    { file: './kit/qwe/Text' },
+  ])
 })

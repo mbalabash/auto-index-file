@@ -90,9 +90,9 @@ Link - directory
 
 For above example module name will be - **Link**.
 
-**Name calculation for named export**: module name will be a combination of directory name and export name.
+**Name calculation for named export**: module name will be a combination of directory name, underscore, export name.
 
-For above example module name will be - **LinkAnchor**.
+For above example module name will be - **Link_Anchor**.
 
 See example: [here](example/components/index.js)
 

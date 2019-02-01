@@ -1,4 +1,4 @@
-import styled from 'styled-components' // eslint-disable-line import/no-unresolved
+import styled from 'styled-components'
 
 const Link = styled.a``
 

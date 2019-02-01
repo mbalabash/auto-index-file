@@ -1,14 +1,16 @@
 const scanFiles = require('./scanFiles')
 const createModulesList = require('./createModulesList')
-const { isCorrectFileName, createExportString } = require('./utils')
+const createExportString = require('./createExportString')
+const { isCorrectFileName, normalizeFilesPath } = require('./utils')
 
 const generateFileContent = async (options) => {
   const { targetDir } = options
   let fileContent = null
 
   const files = scanFiles(targetDir, options).filter(isCorrectFileName)
-  const modules = await createModulesList(files)
+  let modules = await createModulesList(files)
   if (modules.length > 0) {
+    modules = normalizeFilesPath(targetDir, modules)
     fileContent = modules.map(createExportString).join('\n')
   }
 
