@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
 const { promisify } = require('util')
 
 const writeFile = promisify(fs.writeFile)
@@ -15,10 +16,10 @@ const writeIndexFile = async (directory, content) => {
   const targetPath = path.join(directory, 'index.js')
   try {
     const isFileExist = fs.existsSync(targetPath)
-    writeFile(targetPath, content)
-    console.log(`Index.js was ${isFileExist ? 'updated' : 'created'}!\n`)
+    await writeFile(targetPath, content)
+    console.log(chalk.green(`Index.js was ${isFileExist ? 'updated' : chalk.bold('created')}!`))
   } catch (error) {
-    console.error(error)
+    console.error(chalk.red(error.stack))
   }
 }
 

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const chalk = require('chalk')
 
 const scanFiles = (directory, options) => {
   const directories = []
@@ -30,7 +31,7 @@ const scanFiles = (directory, options) => {
       }
     }
   } catch (error) {
-    console.error(error)
+    console.error(chalk.red(error.stack))
   }
 
   return files

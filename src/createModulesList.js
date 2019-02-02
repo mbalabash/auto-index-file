@@ -1,8 +1,9 @@
 const fs = require('fs')
+const chalk = require('chalk')
 const acorn = require('acorn-loose')
 const { promisify } = require('util')
-const parseModuleFromAst = require('./parseModuleFromAst')
 const { normalizeFilesPath } = require('./utils')
+const parseModuleFromAst = require('./parseModuleFromAst')
 
 const readFile = promisify(fs.readFile)
 
@@ -22,7 +23,7 @@ const createModulesList = async (rootDir, files) => {
       modules = normalizeFilesPath(rootDir, modules)
     }
   } catch (error) {
-    console.error(error)
+    console.error(chalk.red(error.stack))
   }
 
   return modules
