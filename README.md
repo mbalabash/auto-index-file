@@ -131,17 +131,17 @@ yarn add auto-index-file
 **Run recursively, observe files changes and process each file with .js extension**:
 
 ```
-autoindexfile -t src/components -r -w
+autoIndexFile -t src/components -r -w
 ```
 
 **Run recursively and process each file with .js or .jsx extension**:
 
 ```
-autoindexfile -t src/components -r -f .js .jsx
+autoIndexFile -t src/components -r -f .js .jsx
 ```
 
 **Run only for one layer depth and process each file with .js extension, but exclude all files in TestComponent and DemoUiKit directories**:
 
 ```
-autoindexfile -t src/components -e TestComponent DemoUiKit
+autoIndexFile -t src/components -e TestComponent DemoUiKit
 ```
