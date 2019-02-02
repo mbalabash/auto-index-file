@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 const scanFiles = require('./scanFiles')
 const createModulesList = require('./createModulesList')
 const createExportString = require('./createExportString')
@@ -12,6 +13,8 @@ const generateFileContent = async (options) => {
   if (modules.length > 0) {
     fileContent = modules.map(createExportString).join('\n')
     fileContent = disableCamelcaseLinterWarning(fileContent)
+  } else {
+    console.log(chalk.cyan('Modules not found!'))
   }
 
   return fileContent
