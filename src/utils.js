@@ -10,7 +10,11 @@ const getParentDirectoryName = filePath => path
   .split(path.sep)
   .pop()
 
-const isCorrectFileName = fileName => path.basename(fileName).toLowerCase() === 'index.js'
+const isCorrectFileName = (allowedExtensions, fileName) => {
+  const name = path.basename(fileName).toLowerCase()
+  const validFileNames = allowedExtensions.map(ext => `index${ext}`)
+  return validFileNames.includes(name)
+}
 
 const writeIndexFile = async (directory, content) => {
   const targetPath = path.join(directory, 'index.js')
