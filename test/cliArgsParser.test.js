@@ -36,7 +36,7 @@ test('should correctly initialize app arguments with minimal configuration', (t)
 })
 
 test('should correctly initialize app arguments with maximum configuration', (t) => {
-  const cliArgs = '-t ./test/__mock__/debugDir -f .js .jsx .ts -ed testDir1 testDir2 -r -w'
+  const cliArgs = '-t ./test/__mock__/debugDir -f .js .jsx .ts -e testDir1 testDir2 -r -w'
   const argParser = initArgParser()
   const options = argParser.parseArgs(cliArgs.split(' '))
   const correctOptions = Object.entries({

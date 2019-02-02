@@ -111,3 +111,37 @@ yarn add auto-index-file
 ```
 
 ## Usage
+
+**CLI arguments**:
+
+**`-h, --help`** Show help message and exit.
+
+**`-t, --targetDir`** Set target directory for processing (**required**).
+
+**`-r, --recursive`** Run recursively (default: false).
+
+**`-w, --watch`** Observe file changes (default: false).
+
+**`-f, --fileFormats`** File extensions whitelist (default: .js).
+
+**`-e, --excludedDirectories`** Excluded directories (default: []).
+
+### Examples
+
+**Run recursively, observe files changes and process each file with .js extension**:
+
+```
+autoindexfile -t src/components -r -w
+```
+
+**Run recursively and process each file with .js or .jsx extension**:
+
+```
+autoindexfile -t src/components -r -f .js .jsx
+```
+
+**Run only for one layer depth and process each file with .js extension, but exclude all files in TestComponent and DemoUiKit directories**:
+
+```
+autoindexfile -t src/components -e TestComponent DemoUiKit
+```

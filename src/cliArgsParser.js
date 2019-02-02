@@ -30,7 +30,7 @@ const initArgParser = () => {
     nargs: '+',
     help: 'File extensions whitelist (default: .js)',
   })
-  argParser.addArgument(['-ed', '--excludedDirectories'], {
+  argParser.addArgument(['-e', '--excludedDirectories'], {
     metavar: '',
     defaultValue: [],
     nargs: '+',
