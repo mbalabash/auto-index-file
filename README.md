@@ -133,5 +133,5 @@ autoIndexFile -t src/components -r -w
 **Run only for one layer depth, but exclude all files in TestComponent and DemoUiKit directories**:
 
 ```
-autoIndexFile -t src/components -e TestComponent DemoUiKit
+autoIndexFile -t src/components -e TestComponent components/uiKit/DemoUIKit
 ```
