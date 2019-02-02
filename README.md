@@ -62,8 +62,6 @@ Fortunately, this work very easy to **automate**!
 
 ## Features
 
-**File formats**: you may pass what you want. For example .jsx or .ts.
-
 **Ignore directories**: you can exclude directories from processing.
 
 **Named exports**: this tool can handle named exports from your components.
@@ -122,25 +120,17 @@ yarn add auto-index-file
 
 **`-w, --watch`** Observe file changes (default: false).
 
-**`-f, --fileFormats`** File extensions whitelist (default: .js).
-
 **`-e, --excludedDirectories`** Excluded directories (default: []).
 
 ### Examples
 
-**Run recursively, observe files changes and process each file with .js extension**:
+**Run recursively and observe files changes**:
 
 ```
 autoIndexFile -t src/components -r -w
 ```
 
-**Run recursively and process each file with .js or .jsx extension**:
-
-```
-autoIndexFile -t src/components -r -f .js .jsx
-```
-
-**Run only for one layer depth and process each file with .js extension, but exclude all files in TestComponent and DemoUiKit directories**:
+**Run only for one layer depth, but exclude all files in TestComponent and DemoUiKit directories**:
 
 ```
 autoIndexFile -t src/components -e TestComponent DemoUiKit

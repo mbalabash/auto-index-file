@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
+const { isCorrectFileName } = require('./utils')
 
 const scanFiles = (directory, options) => {
   const directories = []
@@ -9,14 +10,14 @@ const scanFiles = (directory, options) => {
   try {
     if (!fs.existsSync(directory)) throw new Error(`${directory} - directory not exist!`)
 
-    const { fileFormats, excludedDirectories, recursive } = options
+    const { excludedDirectories, recursive } = options
 
     const fileNames = fs.readdirSync(directory)
     fileNames.forEach((name) => {
       const targetPath = path.join(directory, name)
       const stats = fs.lstatSync(targetPath)
 
-      if (stats.isFile() && fileFormats.includes(path.extname(name))) {
+      if (stats.isFile() && isCorrectFileName(targetPath)) {
         files.push(targetPath)
       }
 

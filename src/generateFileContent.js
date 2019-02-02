@@ -1,13 +1,13 @@
 const scanFiles = require('./scanFiles')
 const createModulesList = require('./createModulesList')
 const createExportString = require('./createExportString')
-const { isCorrectFileName, disableCamelcaseLinterWarning } = require('./utils')
+const { disableCamelcaseLinterWarning } = require('./utils')
 
 const generateFileContent = async (options) => {
-  const { targetDir, fileFormats } = options
+  const { targetDir } = options
   let fileContent = null
 
-  const files = scanFiles(targetDir, options).filter(file => isCorrectFileName(fileFormats, file))
+  const files = scanFiles(targetDir, options)
   const modules = await createModulesList(targetDir, files)
   if (modules.length > 0) {
     fileContent = modules.map(createExportString).join('\n')

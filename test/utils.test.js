@@ -3,20 +3,20 @@ const { isCorrectFileName, getParentDirectoryName, normalizeFilesPath } = requir
 
 test('should be a correct file name', (t) => {
   const correctFileName1 = 'Index.js'
-  const correctFileName2 = 'index.qwe'
+  const correctFileName2 = 'inDex.JS'
   const correctFileName3 = 'TestFolder/INDEX.js'
-  t.is(isCorrectFileName(['.js'], correctFileName1), true)
-  t.is(isCorrectFileName(['.qwe'], correctFileName2), true)
-  t.is(isCorrectFileName(['.js'], correctFileName3), true)
+  t.is(isCorrectFileName(correctFileName1), true)
+  t.is(isCorrectFileName(correctFileName2), true)
+  t.is(isCorrectFileName(correctFileName3), true)
 })
 
 test('should be an incorrect file name', (t) => {
   const incorrectFileName1 = 'qwe.js'
   const incorrectFileName2 = 'TestFolder/component.js'
   const incorrectFileName3 = 'index.png'
-  t.is(isCorrectFileName(['.js'], incorrectFileName1), false)
-  t.is(isCorrectFileName(['.js'], incorrectFileName2), false)
-  t.is(isCorrectFileName(['.js'], incorrectFileName3), false)
+  t.is(isCorrectFileName(incorrectFileName1), false)
+  t.is(isCorrectFileName(incorrectFileName2), false)
+  t.is(isCorrectFileName(incorrectFileName3), false)
 })
 
 test('should extract parent directory name correctly', async (t) => {

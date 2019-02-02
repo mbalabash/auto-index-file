@@ -3,7 +3,6 @@ const initArgParser = require('../src/cliArgsParser')
 
 const defaultOptions = {
   targetDir: '',
-  fileFormats: ['.js'],
   excludedDirectories: [],
   recursive: false,
   watch: false,
@@ -41,7 +40,6 @@ test('should correctly initialize app arguments with maximum configuration', (t)
   const options = argParser.parseArgs(cliArgs.split(' '))
   const correctOptions = Object.entries({
     targetDir: './test/__mock__/debugDir',
-    fileFormats: ['.js', '.jsx', '.ts'],
     excludedDirectories: ['testDir1', 'testDir2'],
     recursive: true,
     watch: true,

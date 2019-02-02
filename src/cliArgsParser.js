@@ -24,12 +24,6 @@ const initArgParser = () => {
     type: value => value === 'true',
     help: 'Observe file changes (default: false)',
   })
-  argParser.addArgument(['-f', '--fileFormats'], {
-    metavar: '',
-    defaultValue: ['.js'],
-    nargs: '+',
-    help: 'File extensions whitelist (default: .js)',
-  })
   argParser.addArgument(['-e', '--excludedDirectories'], {
     metavar: '',
     defaultValue: [],
