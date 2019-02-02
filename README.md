@@ -96,7 +96,7 @@ For above example module name will be - **Link_Anchor**.
 
 See example: [here](example/components/index.js)
 
-<!-- ## Install
+## Install
 
 ```js
 npm i auto-index-file
@@ -106,7 +106,7 @@ or
 
 ```js
 yarn add auto-index-file
-``` -->
+```
 
 ## Usage
 
