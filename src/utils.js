@@ -19,6 +19,7 @@ const isFileInExcludedDirectory = (filePath, excludedDirs) => {
   const dirs = excludedDirs.filter(dir => filePath.includes(path.normalize(dir)))
   return dirs.length > 0
 }
+
 const normalizeFilesPath = (rootDir, modules) => modules.map((moduleObj) => {
   const { file } = moduleObj
   const filePathWithoutName = file
