@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
-const { isCorrectFileName } = require('./utils')
+const { isCorrectFileName, isFileInExcludedDirectory } = require('./utils')
 
 const scanFiles = (directory, options) => {
   const directories = []
@@ -17,10 +17,14 @@ const scanFiles = (directory, options) => {
       const targetPath = path.join(directory, name)
       const stats = fs.lstatSync(targetPath)
 
-      if (stats.isFile() && isCorrectFileName(targetPath)) {
+      if (
+        stats.isFile()
+        && isCorrectFileName(targetPath)
+        && !isFileInExcludedDirectory(targetPath, excludedDirectories)
+      ) {
         files.push(targetPath)
       }
-      if (stats.isDirectory() && !excludedDirectories.includes(name)) {
+      if (stats.isDirectory() && recursive) {
         directories.push(targetPath)
       }
     })
