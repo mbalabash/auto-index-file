@@ -32,9 +32,12 @@ const normalizeFilesPath = (rootDir, modules) => modules.map((moduleObj) => {
   return { ...moduleObj, file: normalizedName }
 })
 
+const disableCamelcaseLinterWarning = fileContent => `/* eslint-disable camelcase */\n${fileContent}`
+
 module.exports = {
   isCorrectFileName,
   getParentDirectoryName,
   writeIndexFile,
+  disableCamelcaseLinterWarning,
   normalizeFilesPath,
 }
