@@ -11,8 +11,8 @@ const scanFiles = (directory, options) => {
     if (!fs.existsSync(directory)) throw new Error(`${directory} - directory not exist!`)
 
     const { excludedDirectories, recursive } = options
-
     const fileNames = fs.readdirSync(directory)
+
     fileNames.forEach((name) => {
       const targetPath = path.join(directory, name)
       const stats = fs.lstatSync(targetPath)
@@ -20,7 +20,6 @@ const scanFiles = (directory, options) => {
       if (stats.isFile() && isCorrectFileName(targetPath)) {
         files.push(targetPath)
       }
-
       if (stats.isDirectory() && !excludedDirectories.includes(name)) {
         directories.push(targetPath)
       }

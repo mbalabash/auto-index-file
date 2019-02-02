@@ -2,6 +2,7 @@ const chalk = require('chalk')
 const path = require('path')
 const chokidar = require('chokidar')
 const { writeIndexFile } = require('./utils')
+const { isCorrectFileName } = require('./utils')
 const initArgParser = require('./cliArgsParser')
 const generateFileContent = require('./generateFileContent')
 
@@ -28,9 +29,12 @@ const autoIndexFile = async (options) => {
       persistent: true,
     })
     const worker = async (filePath) => {
-      console.log(chalk.yellow(`Changed: ${filePath}`))
-      await autoIndexFile(options)
+      if (isCorrectFileName(filePath)) {
+        console.log(chalk.yellow(`Changed: ${filePath}`))
+        await autoIndexFile(options)
+      }
     }
+
     watcher.on('change', worker)
     watcher.on('unlink', worker)
     console.log(chalk.magenta.bold('AutoIndexFile: started!'))
