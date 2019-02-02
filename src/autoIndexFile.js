@@ -1,4 +1,5 @@
 const chalk = require('chalk')
+const path = require('path')
 const chokidar = require('chokidar')
 const { writeIndexFile } = require('./utils')
 const initArgParser = require('./cliArgsParser')
@@ -23,11 +24,11 @@ const autoIndexFile = async (options) => {
   const { watch, targetDir } = options
   if (watch) {
     const watcher = chokidar.watch(targetDir, {
-      ignored: `${targetDir}/index.js`,
+      ignored: path.join(targetDir, 'index.js'),
       persistent: true,
     })
-    const worker = async (path) => {
-      console.log(chalk.yellow(`Changed: ${path}`))
+    const worker = async (filePath) => {
+      console.log(chalk.yellow(`Changed: ${filePath}`))
       await autoIndexFile(options)
     }
     watcher.on('change', worker)
