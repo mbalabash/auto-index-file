@@ -2,11 +2,12 @@ const fs = require('fs')
 const acorn = require('acorn-loose')
 const { promisify } = require('util')
 const parseModuleFromAst = require('./parseModuleFromAst')
+const { normalizeFilesPath } = require('./utils')
 
 const readFile = promisify(fs.readFile)
 
-const createModulesList = async (files) => {
-  const modules = []
+const createModulesList = async (rootDir, files) => {
+  let modules = []
 
   try {
     const promises = files.map(async (file) => {
@@ -16,6 +17,10 @@ const createModulesList = async (files) => {
       if (moduleObj) modules.push(moduleObj)
     })
     await Promise.all(promises)
+
+    if (modules.length > 0) {
+      modules = normalizeFilesPath(rootDir, modules)
+    }
   } catch (error) {
     console.error(error)
   }
