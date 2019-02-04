@@ -74,6 +74,8 @@ Fortunately, this work very easy to **automate**!
 
 **It works only with es6 modules syntax**.
 
+**It works only with files with .js extension**.
+
 This tool **expects and works only** with components structured by the following scheme:
 
 ```
