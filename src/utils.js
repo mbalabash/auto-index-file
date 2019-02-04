@@ -35,7 +35,7 @@ const writeIndexFile = async (directory, content) => {
   try {
     const isFileExist = fs.existsSync(targetPath)
     await writeFile(targetPath, content)
-    console.log(chalk.green(`Index.js was ${isFileExist ? 'updated' : chalk.bold('created')}!`))
+    console.log(chalk.green(`Index.js was ${isFileExist ? 'updated' : 'created'}!`))
   } catch (error) {
     console.error(chalk.red(error.stack))
   }

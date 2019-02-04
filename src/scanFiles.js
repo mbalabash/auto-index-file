@@ -4,7 +4,6 @@ const chalk = require('chalk')
 const { isCorrectFileName, isFileInExcludedDirectory } = require('./utils')
 
 const scanFiles = (directory, options) => {
-  const directories = []
   let files = []
 
   try {
@@ -25,15 +24,9 @@ const scanFiles = (directory, options) => {
         files.push(targetPath)
       }
       if (stats.isDirectory() && recursive) {
-        directories.push(targetPath)
+        files = files.concat(scanFiles(targetPath, options))
       }
     })
-
-    if (directories.length > 0 && recursive) {
-      for (let i = 0; i < directories.length; i += 1) {
-        files = files.concat(scanFiles(directories[i], options))
-      }
-    }
   } catch (error) {
     console.error(chalk.red(error.stack))
   }
