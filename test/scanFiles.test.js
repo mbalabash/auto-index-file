@@ -20,7 +20,6 @@ test('should correctly scan files with recursive configuration', (t) => {
   const options = { ...defaultOptions, targetDir, recursive: true }
   const files = scanFiles(targetDir, options)
   t.deepEqual(files, [
-    'test/__mock__/debugDir/IgnoreMe/index.js',
     'test/__mock__/debugDir/atoms/Component1/index.js',
     'test/__mock__/debugDir/atoms/Component2/index.js',
     'test/__mock__/debugDir/molecules/Component3/index.js',
@@ -30,6 +29,7 @@ test('should correctly scan files with recursive configuration', (t) => {
     'test/__mock__/debugDir/organisms/Component7/index.js',
     'test/__mock__/debugDir/organisms/Component8/index.js',
     'test/__mock__/debugDir/organisms/Component9/index.js',
+    'test/__mock__/debugDir/organisms/IgnoreMe/index.js',
   ])
 })
 
@@ -39,7 +39,7 @@ test('should correctly scan files with excludedDirectories configuration', (t) =
     ...defaultOptions,
     targetDir,
     recursive: true,
-    excludedDirectories: ['IgnoreMe'],
+    excludedDirectories: ['organisms/IgnoreMe'],
   }
   const files = scanFiles(targetDir, options)
   t.deepEqual(files, [
