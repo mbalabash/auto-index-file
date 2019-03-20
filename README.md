@@ -1,6 +1,54 @@
 # AutoIndexFile
 
-**Index.js file without your tears**
+**Index.js file without your tears 😉**
+
+## Install
+
+```js
+npm i auto-index-file
+```
+
+or
+
+```js
+yarn add auto-index-file
+```
+
+## Usage
+
+**CLI arguments**:
+
+**`-h, --help`** Show help message and exit.
+
+**`-t, --targetDir`** Set target directory for processing (**required**).
+
+**`-r, --recursive`** Run recursively (default: false).
+
+**`-w, --watch`** Observe file changes (default: false).
+
+**`-e, --excludedDirectories`** Excluded directories (default: []).
+
+**Run recursively and observe files changes**:
+
+```
+autoIndexFile -t src/components -r -w
+```
+
+**Run only for one layer depth and exclude all files in TestComponent and DemoUiKit directories**:
+
+```
+autoIndexFile -t src/components -e TestComponent components/uiKit/DemoUIKit
+```
+
+## Features
+
+**Ignore directories**: you can exclude directories from processing.
+
+**Named exports**: this tool can handle named exports from your components.
+
+**Recursive**: handle subdirectories or only one layer.
+
+**Watch**: observe file changes and run automatically or just once.
 
 ## Motivation
 
@@ -60,15 +108,17 @@ Mmm, no thanks! It more badly than the first approach.
 
 Fortunately, this work very easy to **automate**!
 
-## Features
+## Name resolving
 
-**Ignore directories**: you can exclude directories from processing.
+**Name calculation for default export**: module name will be a directory name.
 
-**Named exports**: this tool can handle named exports from your components.
+For above example module name will be - **Link**.
 
-**Recursive**: handle subdirectories or only one layer.
+**Name calculation for named export**: module name will be a combination of directory name, underscore, export name.
 
-**Watch**: observe file changes and run automatically or just once.
+For above example module name will be - **Link_Anchor**.
+
+See example: [here](example/components/index.js)
 
 ## Restrictions
 
@@ -84,56 +134,4 @@ Link - component directory
   ...
 ```
 
-See example: [here](example/components/atoms/Text/index.js) or [here](example/components/Link/index.js)
-
-## Name resolving
-
-**Name calculation for default export**: module name will be a directory name.
-
-For above example module name will be - **Link**.
-
-**Name calculation for named export**: module name will be a combination of directory name, underscore, export name.
-
-For above example module name will be - **Link_Anchor**.
-
-See example: [here](example/components/index.js)
-
-## Install
-
-```js
-npm i auto-index-file
-```
-
-or
-
-```js
-yarn add auto-index-file
-```
-
-## Usage
-
-**CLI arguments**:
-
-**`-h, --help`** Show help message and exit.
-
-**`-t, --targetDir`** Set target directory for processing (**required**).
-
-**`-r, --recursive`** Run recursively (default: false).
-
-**`-w, --watch`** Observe file changes (default: false).
-
-**`-e, --excludedDirectories`** Excluded directories (default: []).
-
-### Examples
-
-**Run recursively and observe files changes**:
-
-```
-autoIndexFile -t src/components -r -w
-```
-
-**Run only for one layer depth, but exclude all files in TestComponent and DemoUiKit directories**:
-
-```
-autoIndexFile -t src/components -e TestComponent components/uiKit/DemoUIKit
-```
+See examples: [here](example/components/atoms/Text/index.js) or [here](example/components/Link/index.js)
