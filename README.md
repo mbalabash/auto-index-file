@@ -14,6 +14,16 @@ or
 yarn add -D auto-index-file
 ```
 
+## Features
+
+**Ignore directories**: you can exclude directories from processing.
+
+**Named exports**: this tool can handle named exports from your components.
+
+**Recursive**: handle subdirectories.
+
+**Watch**: observe file changes and run automatically or just once.
+
 ## Usage
 
 **CLI arguments**:
@@ -31,16 +41,6 @@ yarn add -D auto-index-file
 ```
 autoIndexFile -t src/components -w
 ```
-
-## Features
-
-**Ignore directories**: you can exclude directories from processing.
-
-**Named exports**: this tool can handle named exports from your components.
-
-**Recursive**: handle subdirectories.
-
-**Watch**: observe file changes and run automatically or just once.
 
 ## Motivation
 
