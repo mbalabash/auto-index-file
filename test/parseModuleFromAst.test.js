@@ -38,3 +38,5 @@ test('should create correct moduleObject (MixedExportDeclaration)', (t) => {
   }
   t.deepEqual(parseModuleFromAst(filePath, mixedExportAst), correctModuleObj)
 })
+
+// test('should correctly handle default class export', async (t) => {})
