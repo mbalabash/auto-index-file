@@ -1,6 +1,6 @@
 const { getParentDirectoryName } = require('./utils')
 
-const getModuleDescription = () => ({
+const getModuleDefinition = () => ({
   file: '',
   name: '',
   namedExports: [],
@@ -8,20 +8,44 @@ const getModuleDescription = () => ({
 })
 
 const parseModuleFromAst = (filePath, ast) => {
-  const moduleObject = getModuleDescription()
+  const moduleObject = getModuleDefinition()
   const { body: nodes } = ast
 
   nodes.forEach((node) => {
-    const { type } = node
-    if (type === 'ExportDefaultDeclaration') {
+    const { type: exportDeclarationType } = node
+    if (exportDeclarationType === 'ExportDefaultDeclaration') {
       const {
-        declaration: { name },
+        declaration,
+        declaration: { type: exportItemType, id },
       } = node
-      moduleObject.defaultExport = name
+
+      if (exportItemType === 'ClassDeclaration' && id !== null) {
+        const { name } = id
+        moduleObject.defaultExport = name
+      } else if (
+        (exportItemType === 'ClassDeclaration' && id === null)
+        || exportItemType === 'CallExpression'
+      ) {
+        moduleObject.defaultExport = getParentDirectoryName(filePath)
+      } else {
+        const { name } = declaration
+        moduleObject.defaultExport = name
+      }
     }
-    if (type === 'ExportNamedDeclaration' && node.declaration) {
-      const { name } = node.declaration.declarations[0].id
-      moduleObject.namedExports.push(name)
+
+    if (exportDeclarationType === 'ExportNamedDeclaration' && node.declaration) {
+      const {
+        declaration,
+        declaration: { type: exportItemType },
+      } = node
+
+      if (exportItemType === 'ClassDeclaration') {
+        const { name } = declaration.id
+        moduleObject.namedExports.push(name)
+      } else {
+        const { name } = declaration.declarations[0].id
+        moduleObject.namedExports.push(name)
+      }
     }
   })
 
