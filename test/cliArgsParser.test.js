@@ -4,7 +4,6 @@ const initArgParser = require('../src/cliArgsParser')
 const defaultOptions = {
   targetDir: '',
   excludedDirectories: [],
-  recursive: false,
   watch: false,
 }
 
@@ -23,25 +22,24 @@ const validateConfigValues = (t, options, correctOptions) => {
 }
 
 test('should correctly initialize app arguments with minimal configuration', (t) => {
-  const cliArgs = '-t ./test/__mock__/debugDir'
+  const cliArgs = '-t ./test/__mock__/debugComponents'
   const argParser = initArgParser()
   const options = argParser.parseArgs(cliArgs.split(' '))
   const correctOptions = Object.entries({
     ...defaultOptions,
-    targetDir: './test/__mock__/debugDir',
+    targetDir: './test/__mock__/debugComponents',
   })
 
   validateConfigValues(t, options, correctOptions)
 })
 
 test('should correctly initialize app arguments with maximum configuration', (t) => {
-  const cliArgs = '-t ./test/__mock__/debugDir -f .js .jsx .ts -e testDir1 testDir2 -r -w'
+  const cliArgs = '-t ./test/__mock__/debugComponents -e testDir1 testDir1/testDir2 -w'
   const argParser = initArgParser()
   const options = argParser.parseArgs(cliArgs.split(' '))
   const correctOptions = Object.entries({
-    targetDir: './test/__mock__/debugDir',
-    excludedDirectories: ['testDir1', 'testDir2'],
-    recursive: true,
+    targetDir: './test/__mock__/debugComponents',
+    excludedDirectories: ['testDir1', 'testDir1/testDir2'],
     watch: true,
   })
 

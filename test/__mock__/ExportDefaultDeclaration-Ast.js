@@ -38,7 +38,7 @@ const ast = {
       start: 250,
       end: 272,
       declaration: {
-        name: 'TextComponent',
+        name: 'TestComponent1',
       },
     },
   ],

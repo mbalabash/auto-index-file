@@ -38,7 +38,7 @@ const ast = {
       start: 250,
       end: 272,
       declaration: {
-        name: 'TextComponent',
+        name: 'TestComponent3',
       },
     },
     {
@@ -59,7 +59,7 @@ const ast = {
               type: 'Identifier',
               start: 13,
               end: 21,
-              name: 'PlainLink',
+              name: 'Component',
             },
             init: [],
           },

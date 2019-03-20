@@ -5,13 +5,13 @@
 ## Install
 
 ```js
-npm i auto-index-file
+npm i -D auto-index-file
 ```
 
 or
 
 ```js
-yarn add auto-index-file
+yarn add -D auto-index-file
 ```
 
 ## Usage
@@ -22,8 +22,6 @@ yarn add auto-index-file
 
 **`-t, --targetDir`** Set target directory for processing (**required**).
 
-**`-r, --recursive`** Run recursively (default: false).
-
 **`-w, --watch`** Observe file changes (default: false).
 
 **`-e, --excludedDirectories`** Excluded directories (default: []).
@@ -31,13 +29,7 @@ yarn add auto-index-file
 **Run recursively and observe files changes**:
 
 ```
-autoIndexFile -t src/components -r -w
-```
-
-**Run only for one layer depth and exclude all files in TestComponent and DemoUiKit directories**:
-
-```
-autoIndexFile -t src/components -e TestComponent components/uiKit/DemoUIKit
+autoIndexFile -t src/components -w
 ```
 
 ## Features
@@ -46,7 +38,7 @@ autoIndexFile -t src/components -e TestComponent components/uiKit/DemoUIKit
 
 **Named exports**: this tool can handle named exports from your components.
 
-**Recursive**: handle subdirectories or only one layer.
+**Recursive**: handle subdirectories.
 
 **Watch**: observe file changes and run automatically or just once.
 

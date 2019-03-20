@@ -23,7 +23,7 @@ const ast = {
               type: 'Identifier',
               start: 13,
               end: 21,
-              name: 'Component1',
+              name: 'Component',
             },
             init: [],
           },

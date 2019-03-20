@@ -12,12 +12,6 @@ const initArgParser = () => {
     required: true,
     help: 'Target directory for processing',
   })
-  argParser.addArgument(['-r', '--recursive'], {
-    defaultValue: false,
-    action: 'storeTrue',
-    type: value => value === 'true',
-    help: 'Run recursively (default: false)',
-  })
   argParser.addArgument(['-w', '--watch'], {
     defaultValue: false,
     action: 'storeTrue',

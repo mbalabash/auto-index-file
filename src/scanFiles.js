@@ -9,7 +9,7 @@ const scanFiles = (directory, options) => {
   try {
     if (!fs.existsSync(directory)) throw new Error(`${directory} - directory not exist!`)
 
-    const { excludedDirectories, recursive } = options
+    const { excludedDirectories } = options
     const fileNames = fs.readdirSync(directory)
 
     fileNames.forEach((name) => {
@@ -23,7 +23,7 @@ const scanFiles = (directory, options) => {
       ) {
         files.push(targetPath)
       }
-      if (stats.isDirectory() && recursive) {
+      if (stats.isDirectory()) {
         files = files.concat(scanFiles(targetPath, options))
       }
     })
