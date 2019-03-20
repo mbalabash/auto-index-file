@@ -1,10 +1,8 @@
 const chalk = require('chalk')
-const path = require('path')
-const chokidar = require('chokidar')
 const { writeIndexFile } = require('./utils')
 const initArgParser = require('./cliArgsParser')
+const filesWatcher = require('./filesWatcher')
 const generateFileContent = require('./generateFileContent')
-const { isCorrectFileName, isFileInExcludedDirectory } = require('./utils')
 
 const autoIndexFile = async (options) => {
   try {
@@ -24,24 +22,10 @@ const autoIndexFile = async (options) => {
   const { watch } = options
 
   if (watch) {
-    const { targetDir, excludedDirectories } = options
-    const watcher = chokidar.watch(targetDir, {
-      ignored: path.join(targetDir, 'index.js'),
-      persistent: true,
-    })
-    const worker = async (filePath) => {
-      if (
-        isCorrectFileName(filePath)
-        && !isFileInExcludedDirectory(filePath, excludedDirectories)
-      ) {
-        console.log(chalk.yellow(`Changed: ${filePath}`))
-        await autoIndexFile(options)
-      }
-    }
-    watcher.on('change', worker)
-    watcher.on('unlink', worker)
-    console.log(chalk.magenta.bold('AutoIndexFile: started!'))
+    filesWatcher(options)
   } else {
     await autoIndexFile(options)
   }
 })()
+
+module.exports = { autoIndexFile }
