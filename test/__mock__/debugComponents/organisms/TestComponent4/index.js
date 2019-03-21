@@ -1,1 +1,3 @@
-export const TestComponent4 = () => null
+export function TestComponent4() {
+  return null
+}
