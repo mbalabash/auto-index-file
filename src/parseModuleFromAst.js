@@ -19,7 +19,10 @@ const parseModuleFromAst = (filePath, ast) => {
         declaration: { type: exportItemType, id },
       } = node
 
-      if (exportItemType === 'ClassDeclaration' && id !== null) {
+      if (
+        (exportItemType === 'ClassDeclaration' && id !== null)
+        || exportItemType === 'FunctionDeclaration'
+      ) {
         const { name } = id
         moduleObject.defaultExport = name
       } else if (
@@ -39,7 +42,7 @@ const parseModuleFromAst = (filePath, ast) => {
         declaration: { type: exportItemType },
       } = node
 
-      if (exportItemType === 'ClassDeclaration') {
+      if (exportItemType === 'ClassDeclaration' || exportItemType === 'FunctionDeclaration') {
         const { name } = declaration.id
         moduleObject.namedExports.push(name)
       } else {
