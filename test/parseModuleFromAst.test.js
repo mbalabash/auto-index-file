@@ -7,6 +7,7 @@ const astDefaultForNamedClassAfterBody = require('./__mock__/debugComponents/org
 const astDefaultForUnnamedClass = require('./__mock__/debugComponents/organisms/TestComponent7/ast')
 const astDefaultForWrappedObjects = require('./__mock__/debugComponents/organisms/TestComponent8/ast')
 const astDefaultForNamedFunctionBeforeName = require('./__mock__/debugComponents/organisms/TestComponent10/ast')
+const astDefaultForIIFE = require('./__mock__/debugComponents/organisms/TestComponent11/ast')
 
 test('should correctly parse ExportDefaultDeclaration for Identifier', (t) => {
   const filePath = './test/__mock__/debugComponents/atoms/TestComponent1/index.js'
@@ -78,4 +79,16 @@ test('should correctly parse ExportDefaultDeclaration for Named Function (before
     defaultExport: 'TestComponent10',
   }
   t.deepEqual(parseModuleFromAst(filePath, astDefaultForNamedFunctionBeforeName), correctModuleObj)
+})
+
+test('should correctly parse ExportDefaultDeclaration for IIFE', (t) => {
+  const filePath = './test/__mock__/debugComponents/organisms/TestComponent11/index.js'
+
+  const correctModuleObj = {
+    file: `./${filePath}`,
+    name: 'TestComponent11',
+    namedExports: [],
+    defaultExport: 'TestComponent11',
+  }
+  t.deepEqual(parseModuleFromAst(filePath, astDefaultForIIFE), correctModuleObj)
 })
