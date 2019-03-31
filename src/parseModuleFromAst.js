@@ -1,5 +1,49 @@
 const { getParentDirectoryName } = require('./utils')
 
+const isClassOrFunctionModule = moduleType => moduleType === 'ClassDeclaration' || moduleType === 'FunctionDeclaration'
+
+const parseExportDefaultDeclaration = (node, filePath) => {
+  let defaultExport = ''
+  const {
+    declaration: { type: moduleType, id },
+  } = node
+
+  if (isClassOrFunctionModule(moduleType) && id !== null) {
+    const { name } = id
+    defaultExport = name
+  }
+  if ((isClassOrFunctionModule(moduleType) && id === null) || moduleType === 'CallExpression') {
+    defaultExport = getParentDirectoryName(filePath)
+  } else {
+    const {
+      declaration: { name },
+    } = node
+    defaultExport = name
+  }
+
+  return defaultExport
+}
+
+const parseExportNamedDeclaration = (node) => {
+  const namedExports = []
+  const { declaration } = node
+  if (!declaration) return namedExports
+
+  const { type: moduleType } = declaration
+  if (isClassOrFunctionModule(moduleType)) {
+    const {
+      id: { name },
+    } = declaration
+    namedExports.push(name)
+  } else {
+    const { declarations } = declaration
+    const { id: name } = declarations[0]
+    namedExports.push(name)
+  }
+
+  return namedExports
+}
+
 const getModuleDefinition = () => ({
   file: '',
   name: '',
@@ -8,47 +52,17 @@ const getModuleDefinition = () => ({
 })
 
 const parseModuleFromAst = (filePath, ast) => {
-  const moduleObject = getModuleDefinition()
   const { body: nodes } = ast
+  const moduleObject = getModuleDefinition()
 
   nodes.forEach((node) => {
-    const { type: exportDeclarationType } = node
-    if (exportDeclarationType === 'ExportDefaultDeclaration') {
-      const {
-        declaration,
-        declaration: { type: exportItemType, id },
-      } = node
+    const { type: exportType } = node
 
-      if (
-        (exportItemType === 'ClassDeclaration' && id !== null)
-        || exportItemType === 'FunctionDeclaration'
-      ) {
-        const { name } = id
-        moduleObject.defaultExport = name
-      } else if (
-        (exportItemType === 'ClassDeclaration' && id === null)
-        || exportItemType === 'CallExpression'
-      ) {
-        moduleObject.defaultExport = getParentDirectoryName(filePath)
-      } else {
-        const { name } = declaration
-        moduleObject.defaultExport = name
-      }
+    if (exportType === 'ExportDefaultDeclaration') {
+      moduleObject.defaultExport = parseExportDefaultDeclaration(node, filePath)
     }
-
-    if (exportDeclarationType === 'ExportNamedDeclaration' && node.declaration) {
-      const {
-        declaration,
-        declaration: { type: exportItemType },
-      } = node
-
-      if (exportItemType === 'ClassDeclaration' || exportItemType === 'FunctionDeclaration') {
-        const { name } = declaration.id
-        moduleObject.namedExports.push(name)
-      } else {
-        const { name } = declaration.declarations[0].id
-        moduleObject.namedExports.push(name)
-      }
+    if (exportType === 'ExportNamedDeclaration') {
+      moduleObject.namedExports = parseExportNamedDeclaration(node)
     }
   })
 

@@ -1,3 +1,9 @@
+const generateDefaultExport = (name, file) => `export { default as ${name} } from '${file}'`
+
+const generateNamedExports = (name, file, namedExports) => `export { ${namedExports
+  .map(moduleName => `${moduleName} as ${name}_${moduleName}`)
+  .join(', ')} } from '${file}'`
+
 const createExportString = (moduleObj) => {
   const {
     file, name, defaultExport, namedExports,
@@ -5,15 +11,12 @@ const createExportString = (moduleObj) => {
   let exportString = ''
 
   if (defaultExport.length > 0) {
-    exportString += `export { default as ${name} } from '${file}'`
+    exportString += generateDefaultExport(name, file)
   }
 
   if (namedExports.length > 0) {
     if (defaultExport.length > 0) exportString += '\n'
-
-    exportString += `export { ${namedExports
-      .map(moduleName => `${moduleName} as ${name}_${moduleName}`)
-      .join(', ')} } from '${file}'`
+    exportString += generateNamedExports(name, file, namedExports)
   }
 
   return exportString
