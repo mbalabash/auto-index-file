@@ -3,6 +3,8 @@ const path = require('path')
 const chalk = require('chalk')
 const { isCorrectFileName, isFileInExcludedDirectory } = require('./utils')
 
+// TODO: Add caching
+
 const scanFiles = (directory, options) => {
   let files = []
 

@@ -41,13 +41,10 @@ const writeIndexFile = async (directory, content) => {
   }
 }
 
-const disableCamelcaseLinterWarning = fileContent => `/* eslint-disable camelcase */\n${fileContent}`
-
 module.exports = {
   isCorrectFileName,
   getParentDirectoryName,
   writeIndexFile,
   isFileInExcludedDirectory,
-  disableCamelcaseLinterWarning,
   normalizeFilesPath,
 }
