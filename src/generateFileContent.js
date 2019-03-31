@@ -11,6 +11,7 @@ const generateFileContent = async (options) => {
   const files = scanFiles(targetDir, options)
   const modules = await createModulesList(targetDir, files)
   if (modules.length > 0) {
+    // TODO: Post process file content HERE:
     fileContent = modules.map(createExportString).join('\n')
     fileContent = disableCamelcaseLinterWarning(fileContent)
   } else {

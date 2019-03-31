@@ -8,6 +8,8 @@ const astDefaultForUnnamedClass = require('./__mock__/debugComponents/organisms/
 const astDefaultForWrappedObjects = require('./__mock__/debugComponents/organisms/TestComponent8/ast')
 const astDefaultForNamedFunctionBeforeName = require('./__mock__/debugComponents/organisms/TestComponent10/ast')
 const astDefaultForIIFE = require('./__mock__/debugComponents/organisms/TestComponent11/ast')
+const astNamedForIdentifier = require('./__mock__/debugComponents/ignoreMe/TestComponent0/ast')
+const astNamedForFunction = require('./__mock__/debugComponents/organisms/TestComponent4/ast')
 
 test('should correctly parse ExportDefaultDeclaration for Identifier', (t) => {
   const filePath = './test/__mock__/debugComponents/atoms/TestComponent1/index.js'
@@ -39,7 +41,7 @@ test('should correctly parse ExportDefaultDeclaration for Named Class (after bod
   const correctModuleObj = {
     file: `./${filePath}`,
     name: 'TestComponent6',
-    namedExports: [],
+    namedExports: ['TestComponent6'],
     defaultExport: 'TestComponent6',
   }
   t.deepEqual(parseModuleFromAst(filePath, astDefaultForNamedClassAfterBody), correctModuleObj)
@@ -91,4 +93,28 @@ test('should correctly parse ExportDefaultDeclaration for IIFE', (t) => {
     defaultExport: 'TestComponent11',
   }
   t.deepEqual(parseModuleFromAst(filePath, astDefaultForIIFE), correctModuleObj)
+})
+
+test('should correctly parse ExportNamedDeclaration for Identifier', (t) => {
+  const filePath = './test/__mock__/debugComponents/ignoreMe/TestComponent0/index.js'
+
+  const correctModuleObj = {
+    file: `./${filePath}`,
+    name: 'TestComponent0',
+    namedExports: ['TestComponent0'],
+    defaultExport: '',
+  }
+  t.deepEqual(parseModuleFromAst(filePath, astNamedForIdentifier), correctModuleObj)
+})
+
+test('should correctly parse ExportNamedDeclaration for Function', (t) => {
+  const filePath = './test/__mock__/debugComponents/organisms/TestComponent4/index.js'
+
+  const correctModuleObj = {
+    file: `./${filePath}`,
+    name: 'TestComponent4',
+    namedExports: ['TestComponent4'],
+    defaultExport: '',
+  }
+  t.deepEqual(parseModuleFromAst(filePath, astNamedForFunction), correctModuleObj)
 })
