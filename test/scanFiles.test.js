@@ -22,11 +22,15 @@ test('should correctly scan files in directory with components', (t) => {
     'test/__mock__/debugComponents/atoms/TestComponent1/index.js',
     'test/__mock__/debugComponents/ignoreMe/TestComponent0/index.js',
     'test/__mock__/debugComponents/molecules/TestComponent2/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent10/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent11/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent3/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent4/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent5/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent6/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent7/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent8/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent9/index.js',
   ])
 })
 
@@ -41,11 +45,15 @@ test('should correctly scan files and handle excludedDirectories configuration',
   t.deepEqual(files, [
     'test/__mock__/debugComponents/atoms/TestComponent1/index.js',
     'test/__mock__/debugComponents/molecules/TestComponent2/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent10/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent11/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent3/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent4/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent5/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent6/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent7/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent8/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent9/index.js',
   ])
 })
 
@@ -60,9 +68,13 @@ test('should correctly scan files and handle excludedDirectories configuration w
   t.deepEqual(files, [
     'test/__mock__/debugComponents/atoms/TestComponent1/index.js',
     'test/__mock__/debugComponents/molecules/TestComponent2/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent10/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent11/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent3/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent5/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent6/index.js',
     'test/__mock__/debugComponents/organisms/TestComponent7/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent8/index.js',
+    'test/__mock__/debugComponents/organisms/TestComponent9/index.js',
   ])
 })

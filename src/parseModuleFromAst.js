@@ -11,8 +11,10 @@ const parseExportDefaultDeclaration = (node, filePath) => {
   if (isClassOrFunctionModule(moduleType) && id !== null) {
     const { name } = id
     defaultExport = name
-  }
-  if ((isClassOrFunctionModule(moduleType) && id === null) || moduleType === 'CallExpression') {
+  } else if (
+    (isClassOrFunctionModule(moduleType) && id === null)
+    || moduleType === 'CallExpression'
+  ) {
     defaultExport = getParentDirectoryName(filePath)
   } else {
     const {
@@ -37,7 +39,9 @@ const parseExportNamedDeclaration = (node) => {
     namedExports.push(name)
   } else {
     const { declarations } = declaration
-    const { id: name } = declarations[0]
+    const {
+      id: { name },
+    } = declarations[0]
     namedExports.push(name)
   }
 
