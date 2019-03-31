@@ -127,3 +127,11 @@ Link - component directory
 ```
 
 See examples: [here](example/components/atoms/Text/index.js) or [here](example/components/Link/index.js)
+
+## Support
+
+Feel free to ask or open an issue
+
+## Licence
+
+MIT
