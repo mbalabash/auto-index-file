@@ -1,7 +1,5 @@
 const chalk = require('chalk')
 const { writeIndexFile } = require('./utils')
-const initArgParser = require('./cliArgsParser')
-const filesWatcher = require('./filesWatcher')
 const generateFileContent = require('./generateFileContent')
 
 const autoIndexFile = async (options) => {
@@ -16,16 +14,4 @@ const autoIndexFile = async (options) => {
   }
 }
 
-;(async () => {
-  const argParser = initArgParser()
-  const options = argParser.parseArgs()
-  const { watch } = options
-
-  if (watch) {
-    filesWatcher(options)
-  } else {
-    await autoIndexFile(options)
-  }
-})()
-
-module.exports = { autoIndexFile }
+module.exports = autoIndexFile
