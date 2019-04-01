@@ -1,7 +1,5 @@
 # AutoIndexFile
 
-**Index.js file without your tears 😉**
-
 ## Install
 
 ```js
