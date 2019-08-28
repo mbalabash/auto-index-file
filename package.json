@@ -1,6 +1,6 @@
 {
   "name": "auto-index-file",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Index.js file without your tears 😉",
   "scripts": {
     "eslint": "eslint ./src --cache --fix",
