@@ -1,6 +1,6 @@
 const { getParentDirectoryName } = require('./utils')
 
-const isClassOrFunctionModule = moduleType => moduleType === 'ClassDeclaration' || moduleType === 'FunctionDeclaration'
+const isClassOrFunctionModule = (moduleType) => moduleType === 'ClassDeclaration' || moduleType === 'FunctionDeclaration'
 
 const parseExportDefaultDeclaration = (node, filePath) => {
   let defaultExport = ''

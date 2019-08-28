@@ -15,7 +15,7 @@ const initArgParser = () => {
   argParser.addArgument(['-w', '--watch'], {
     defaultValue: false,
     action: 'storeTrue',
-    type: value => value === 'true',
+    type: (value) => value === 'true',
     help: 'Observe file changes (default: false)',
   })
   argParser.addArgument(['-e', '--excludedDirectories'], {

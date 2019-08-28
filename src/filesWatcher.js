@@ -27,8 +27,8 @@ const filesWatcher = (options) => {
     persistent: true,
   })
 
-  watcher.on('change', file => worker(file, 'change', options))
-  watcher.on('unlink', file => worker(file, 'unlink', options))
+  watcher.on('change', (file) => worker(file, 'change', options))
+  watcher.on('unlink', (file) => worker(file, 'unlink', options))
   console.log(chalk.magenta.bold('AutoIndexFile: started!'))
 }
 

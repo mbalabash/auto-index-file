@@ -1,6 +1,6 @@
-const disableCamelcaseLinterWarning = fileContent => `/* eslint-disable camelcase */\n${fileContent}`
+const disableCamelcaseLinterWarning = (fileContent) => `/* eslint-disable camelcase */\n${fileContent}`
 
-const addEmptyLineToEndOfFile = fileContent => `${fileContent}\n`
+const addEmptyLineToEndOfFile = (fileContent) => `${fileContent}\n`
 
 const postProcessFileContent = (fileContent) => {
   let content = fileContent.slice()

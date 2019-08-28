@@ -5,7 +5,7 @@ const { promisify } = require('util')
 
 const writeFile = promisify(fs.writeFile)
 
-const getParentDirectoryName = filePath => path
+const getParentDirectoryName = (filePath) => path
   .dirname(filePath)
   .split(path.sep)
   .pop()
@@ -16,7 +16,7 @@ const isCorrectFileName = (filePath) => {
 }
 
 const isFileInExcludedDirectory = (filePath, excludedDirs) => {
-  const dirs = excludedDirs.filter(dir => filePath.includes(path.normalize(dir)))
+  const dirs = excludedDirs.filter((dir) => filePath.includes(path.normalize(dir)))
   return dirs.length > 0
 }
 

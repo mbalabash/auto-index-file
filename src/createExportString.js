@@ -1,7 +1,7 @@
 const generateDefaultExport = (name, file) => `export { default as ${name} } from '${file}'`
 
 const generateNamedExports = (name, file, namedExports) => `export { ${namedExports
-  .map(moduleName => `${moduleName} as ${name}_${moduleName}`)
+  .map((moduleName) => `${moduleName} as ${name}_${moduleName}`)
   .join(', ')} } from '${file}'`
 
 const createExportString = (moduleObj) => {
